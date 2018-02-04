@@ -14,6 +14,6 @@ var map = L.map('map', {
 构造器
 
 |构造器 | 描述 |
-|-------|-------|-------|-------|-------|
+|-------|-------|
 |L.map(<String> id, <Map options> options?) | 通过元素ID实例化地图|
 |L.map(<HTMLElement> el, <Map options> options?) | 通过HTML元素实例化地图|
