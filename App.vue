@@ -10,8 +10,14 @@ import 'proj4leaflet'
 export default {
   name: 'Map',
   props: {
-    width: Number,
-    height: Number,
+    width: {
+      type: Number,
+      default: 1200
+    },
+    height: {
+      type: Number,
+      default: 800
+    },
     center: Array,
     zoom: Number
   },
@@ -58,10 +64,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.map {
-  width: 1200px;
-  height: 800px;
-}
-</style>
