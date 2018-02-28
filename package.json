@@ -1,6 +1,6 @@
 {
   "name": "map-puge",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "leaflet 加载百度瓦片地图图层 以及高德 、天地图等国内常用地图",
   "author": "PUGE <100284685@qq.com>",
   "main": "./index.js",
