@@ -128,6 +128,13 @@ export default {
     // 待优化 不知道有用没
     layer (layer) {
       this.getBaiDuLayer({ layer }).addTo(map)
+    },
+    width () {
+      // 检查地图容器的大小是否改变并更新地图，如果是这样的话，在动态改变地图大小后调用，如果animate是true的话，对地图进行更新.
+      map.invalidateSize(true)
+    },
+    height () {
+      map.invalidateSize(true)
     }
   }
 }
