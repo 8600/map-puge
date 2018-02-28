@@ -6,7 +6,7 @@
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'proj4leaflet'
-
+let map = null
 export default {
   name: 'Map',
   props: {
@@ -24,7 +24,7 @@ export default {
     },
     layer: {
       type: String,
-      default: 'vec'
+      default: 'simulation'
     },
     // 大字体
     bigfont: {
@@ -39,8 +39,8 @@ export default {
     const dom = this.$el
     const layer = this.layer
     if (this.tileLayer === 'baidu') {
-      const map = L.map(dom, {
-        crs: getBaiDuCRS(),
+      map = L.map(dom, {
+        crs: this.getBaiDuCRS(),
         minZoom: 3,
         maxZoom: 18,
         attributionControl: false
@@ -54,7 +54,7 @@ export default {
       let layer, subdomains = '0123456789'
       switch (option.layer) {
         //单图层
-        case "vec":
+        case "simulation":
         default:
           layer = L.tileLayer('http://online{s}.map.bdimg.com/onlinelabel/?qt=tile&x={x}&y={y}&z={z}&styles=' + (option.bigfont ? 'ph' : 'pl') + '&scaler=1&p=1', {
             name:option.name,
@@ -87,7 +87,7 @@ export default {
           })
           break
 
-        case "time":// 实时路况
+        case "traffic":// 实时路况
           const time = new Date().getTime();
           layer = L.tileLayer('http://its.map.baidu.com:8002/traffic/TrafficTileService?x={x}&y={y}&level={z}&time=' + time + '&label=web2D&v=017', {
             name: option.name,
@@ -97,10 +97,10 @@ export default {
           break
 
         //合并
-        case "img":
+        case "satellite":
           layer = L.layerGroup([
-            L.tileLayer.baidu({ name: "底图", layer: 'img_d', bigfont: option.bigfont }),
-            L.tileLayer.baidu({ name: "注记", layer: 'img_z', bigfont: option.bigfont })
+            this.getBaiDuLayer({ name: "底图", layer: 'img_d', bigfont: option.bigfont }),
+            this.getBaiDuLayer({ name: "注记", layer: 'img_z', bigfont: option.bigfont })
           ]);
           break
       }
@@ -122,6 +122,12 @@ export default {
         origin: [0, 0],
         bounds: L.bounds([20037508.342789244, 0], [0, 20037508.342789244])
       })
+    }
+  },
+  watch: {
+    // 待优化 不知道有用没
+    layer (layer) {
+      this.getBaiDuLayer({ layer }).addTo(map)
     }
   }
 }
