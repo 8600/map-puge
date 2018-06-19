@@ -22,6 +22,10 @@ export default {
       type: String,
       default: 'baidu'
     },
+    customid: {
+      type: String,
+      default: 'midnight'
+    },
     layer: {
       type: String,
       default: 'simulation'
@@ -79,8 +83,7 @@ export default {
         // Custom 各种自定义样式
         case "custom":
           //可选值：dark,midnight,grayscale,hardedge,light,redalert,googlelite,grassgreen,pink,darkgreen,bluish
-          option.customid = option.customid || 'midnight';
-          layer = L.tileLayer('http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid=' + option.customid, {
+          layer = L.tileLayer('http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid=' + this.customid, {
             name: option.name,
             subdomains: "012",
             tms: true
