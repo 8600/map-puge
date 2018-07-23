@@ -11,6 +11,7 @@
 |option| 地图配置| Object | false |
 |center| 中心点坐标| Array | true |
 |zoom| 缩放比例| Number | true |
+|zoomControl| 是否显示缩放控制器| Boolean | true |
 
 ## option选项
 

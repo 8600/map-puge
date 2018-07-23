@@ -35,19 +35,23 @@ export default {
       type: Boolean,
       default: false
     },
+    zoomControl: { // 缩放控制器
+      type: Boolean,
+      default: false
+    },
     center: Array,
     zoom: Number
   },
   mounted () {
     // 获取dom元素
-    const dom = this.$el
     const layer = this.layer
     if (this.tileLayer === 'baidu') {
-      map = L.map(dom, {
+      map = L.map(this.$el, {
         crs: this.getBaiDuCRS(),
         minZoom: 3,
         maxZoom: 18,
-        attributionControl: false
+        attributionControl: false,
+        zoomControl: this.zoomControl
       }).setView(this.center, this.zoom)
       this.getBaiDuLayer({ layer }).addTo(map)
     }
